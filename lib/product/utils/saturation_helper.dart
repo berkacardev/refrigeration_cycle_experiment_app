@@ -4,7 +4,10 @@ import 'package:refrigeration_cycle_experiment_app/product/enums/refrigerant_flu
 abstract class SaturationHelper {
   SaturationHelper._();
 
-  static double saturationTemp(double pressure, RefrigerantFluid fluid) {
+  static const double _atmBar = 1.01325;
+
+  static double saturationTemp(double pressureGauge, RefrigerantFluid fluid) {
+    final pressure = pressureGauge + _atmBar;
     if (pressure <= 0) return double.nan;
     return switch (fluid) {
       RefrigerantFluid.r407c => _r407c(pressure),
@@ -13,24 +16,24 @@ abstract class SaturationHelper {
     };
   }
 
-  static double superheat(double evapTemp, double pressure, RefrigerantFluid fluid) {
-    final tSat = saturationTemp(pressure, fluid);
+  static double superheat(double evapTemp, double pressureGauge, RefrigerantFluid fluid) {
+    final tSat = saturationTemp(pressureGauge, fluid);
     if (tSat.isNaN) return double.nan;
     return evapTemp - tSat;
   }
 
   static double _r407c(double p) {
     final lp = log(p);
-    return 0.25955 * (pow(lp, 3) - 1.41307 * pow(lp, 2) + 16.8028 * lp - 109.781);
+    return 0.27881557 * pow(lp, 3) + 2.08721003 * pow(lp, 2) + 20.31920250 * lp - 36.89630567;
   }
 
   static double _r22(double p) {
     final lp = log(p);
-    return -1.0540 * pow(lp, 2) + 20.623 * lp - 45.870;
+    return 0.31520516 * pow(lp, 3) + 2.27084948 * pow(lp, 2) + 21.13686774 * lp - 41.08689398;
   }
 
   static double _r134a(double p) {
     final lp = log(p);
-    return -1.5783 * pow(lp, 2) + 22.448 * lp - 55.921;
+    return 0.03322643 * pow(lp, 3) + 2.36502464 * pow(lp, 2) + 21.34274239 * lp - 26.73342039;
   }
 }

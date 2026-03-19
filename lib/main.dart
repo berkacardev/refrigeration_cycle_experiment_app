@@ -59,9 +59,7 @@ class _RefrigerationAppState extends State<RefrigerationApp> with WindowListener
 
   @override
   void onWindowClose() async {
-    // Gracefully stop experiment + release serial port
     await _globalProvider.shutdownGracefully();
-    // Now allow the window to actually close
     await windowManager.destroy();
   }
 
