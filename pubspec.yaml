@@ -1,0 +1,32 @@
+name: refrigeration_cycle_experiment_app
+description: "Buhar Sıkıştırmalı Soğutma Çevrimi - Deneysel İzleme"
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  fl_chart: ^1.2.0
+  google_fonts: ^8.0.2
+  provider: ^6.1.1
+  url_launcher: ^6.3.2
+  window_manager: ^0.5.1
+  flutter_libserialport: ^0.6.0
+  equatable: ^2.0.8
+  file_picker: ^10.3.10
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true

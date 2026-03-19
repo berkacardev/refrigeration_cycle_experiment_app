@@ -1,0 +1,1 @@
+enum FaultSeverity { warning, error, critical, danger }
